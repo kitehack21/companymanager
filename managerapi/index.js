@@ -60,8 +60,8 @@ app.delete('/companies/:id', function(req,res){
     })
 })
 
-app.get('/offices/:id', function(req,res){
-    var sql = `SELECT * FROM offices WHERE companyId = ${req.params.id}`
+app.get('/offices', function(req,res){
+    var sql = `SELECT * FROM offices`
     conn.query(sql, (err,results)=>{
         if(err) throw err;
         console.log(results)

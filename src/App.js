@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import OverviewPage from './components/OverviewPage'
 import OfficesPage from './components/OfficesPage'
 
@@ -12,10 +12,10 @@ class App extends Component {
     return (
       <div >
         <Route exact path="/" component = {OverviewPage}/>
-        <Route path="/companies/:id" component = {OfficesPage}/>
+        <Route path="/companies/:companyId" component = {OfficesPage}/>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

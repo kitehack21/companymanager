@@ -4,7 +4,7 @@ import { GET_OFFICES } from './types'
 
 export const createOffice = (office) =>{
     return(dispatch) => {
-        axios.get(API_URL_1 + "/companies", office)
+        axios.post(API_URL_1 + "/offices", office)
         .then(res => {
             console.log(res)
                 dispatch (
@@ -12,9 +12,6 @@ export const createOffice = (office) =>{
                 )
         }).catch(err => {
             console.log(err);
-                dispatch({
-                    
-                })
         })
     }
 };
@@ -34,3 +31,17 @@ export const getOffices = () =>{
     }
 };
 
+
+export const deleteOffice = (officeId) => {
+    return(dispatch) => {
+        axios.delete(API_URL_1 + "/offices/" + officeId)
+        .then(res => {
+            console.log(res)
+            dispatch(
+                getOffices()
+            )
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}

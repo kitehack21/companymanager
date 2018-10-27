@@ -16,10 +16,10 @@ class CompanyCard extends Component{
 
     render(){
         return(
-            <div className="col-md-6" style={{"padding-left":"0px", "padding-right":"30px"}} onClick={()=>this.onCompanyCardClick()}>
+            <div className="col-md-6" style={{"paddingLeft":"0px", "paddingRight":"30px"}} onClick={()=>this.onCompanyCardClick()}>
                 <div className="b-a wrapper-md" style={{"borderRadius":"8px"}}>
                     <div className="b-b b-dark">
-                        <h4><strong>{this.props.name}</strong><button type="button" class="close" onClick={(e)=>this.onCompanyDeleteClick(e)}>×</button></h4>
+                        <h4><strong>{this.props.name}</strong><button type="button" className="close" onClick={(e)=>this.onCompanyDeleteClick(e)}>×</button></h4>
                     </div>
                     <div className="padder-v-xs">
                         <div>

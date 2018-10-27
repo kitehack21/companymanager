@@ -1,14 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Officecard from './OfficeCard'
+import { getOffices } from '../actions'
 
 class OfficesPage extends Component{
 
-
+    componentWillMount(){
+        this.props.getOffices()
+    }
 
     renderOffices(){
-        return(
-            <div>offices</div>
-        )
+        console.log(this.props.match.params.companyId)
+        console.log(this.props.offices)
+
+        var arrJSX = this.props.offices.map((office) => {
+            if(parseInt(office.companyId) === parseInt(this.props.match.params.companyId))
+            return(
+                <Officecard key={office.id} id={office.id} name={office.name} longitude={office.longitude} latitude={office.latitude} startDate={office.startDate}/>
+            )
+        })
+
+        if(arrJSX.length === 0){
+            return(
+                <div>There are no offices created yet</div>
+            )
+        }
+        else{
+            return arrJSX
+        }
     }
 
     render(){
@@ -33,4 +52,4 @@ const mapStateToProps = (state) => {
     return { companies, offices }
 }
 
-export default connect(mapStateToProps, {})(OfficesPage)
+export default connect(mapStateToProps, { getOffices })(OfficesPage)
