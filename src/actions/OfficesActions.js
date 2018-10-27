@@ -1,20 +1,36 @@
 import axios from 'axios'
-import {API_URL_1} from '../supports/api-url/apiurl'
+import { API_URL_1 } from '../supports/api-url/apiurl'
+import { GET_OFFICES } from './types'
 
 export const createOffice = (office) =>{
     return(dispatch) => {
-        axios.get(API_URL_1 + "/companies", office
-        ).then(res => {
+        axios.get(API_URL_1 + "/companies", office)
+        .then(res => {
             console.log(res)
-                dispatch ({
-                    type: "USER_LOGIN_SUCCESS",
-                    payload: {username: res.data.user.username, email: res.data.user.email, id: res.data.user.id, subscription: res.data.subscription.status, error: ""}
-                })
+                dispatch (
+                    getOffices()
+                )
         }).catch(err => {
             console.log(err);
                 dispatch({
-                    type: "USER_LOGIN_FAIL"
+                    
                 })
         })
     }
 };
+
+export const getOffices = () =>{
+    return(dispatch) => {
+        axios.get(API_URL_1 + "/offices")
+        .then(res => {
+            console.log(res)
+                dispatch ({ 
+                    type: GET_OFFICES,
+                    payload: res.data
+                })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+};
+

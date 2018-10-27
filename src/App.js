@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div >
         <Route exact path="/" component = {OverviewPage}/>
-        <Route path="/companies" component = {OfficesPage}/>
+        <Route path="/companies/:id" component = {OfficesPage}/>
       </div>
     );
   }

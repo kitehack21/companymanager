@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CreateCompanyForm from './CreateCompanyForm'
 import CreateOfficeForm from './CreateOfficeForm'
 import { connect } from 'react-redux'
-import { getCompanies} from '../actions'
+import { getCompanies } from '../actions'
 import CompanyCard from './CompanyCard'
 
 class OverviewPage extends Component{
@@ -20,7 +20,7 @@ class OverviewPage extends Component{
         }
         else{
             var arrJSX = this.props.companies.map((company) => {
-                return(<CompanyCard name={company.name} address={company.address} revenue={company.revenue} phone={company.phone}/>)
+                return(<CompanyCard id={company.id} name={company.name} address={company.address} revenue={company.revenue} phone={company.phone} history={this.props.history}/>)
             })
             return arrJSX
         }

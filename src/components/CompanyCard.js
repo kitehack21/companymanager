@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
 import { connect }from 'react-redux'
+import { deleteCompany } from '../actions'
+
 
 class CompanyCard extends Component{
 
-    onCompanyDelete(){
+    onCompanyDeleteClick(event){
+        event.stopPropagation()
+        this.props.deleteCompany(this.props.id)
+    }
 
+    onCompanyCardClick(){
+        this.props.history.push(`/companies/${this.props.id}`)
     }
 
     render(){
         return(
-            <div className="col-md-6" style={{"padding-left":"0px", "padding-right":"30px"}}>
+            <div className="col-md-6" style={{"padding-left":"0px", "padding-right":"30px"}} onClick={()=>this.onCompanyCardClick()}>
                 <div className="b-a wrapper-md" style={{"borderRadius":"8px"}}>
                     <div className="b-b b-dark">
-                        <h4><strong>{this.props.name}</strong><button type="button" class="close">×</button></h4>
+                        <h4><strong>{this.props.name}</strong><button type="button" class="close" onClick={(e)=>this.onCompanyDeleteClick(e)}>×</button></h4>
                     </div>
                     <div className="padder-v-xs">
                         <div>
@@ -45,4 +52,4 @@ class CompanyCard extends Component{
 
 }
 
-export default connect(null,)(CompanyCard)
+export default connect(null, { deleteCompany })(CompanyCard)

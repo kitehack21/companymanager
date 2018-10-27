@@ -7,7 +7,9 @@ export const createCompany = (company) => {
         axios.post(API_URL_1 + "/companies", company)
         .then(res => {
             console.log(res)
-            this.getCompanies()
+            dispatch(
+                getCompanies()
+            )
         }).catch(err => {
             console.log(err);
         })
@@ -23,6 +25,20 @@ export const getCompanies = () => {
                     type: GET_COMPANIES,
                     payload: res.data
                 })
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+export const deleteCompany = (companyId) => {
+    return(dispatch) => {
+        axios.delete(API_URL_1 + "/companies/" + companyId)
+        .then(res => {
+            console.log(res)
+            dispatch(
+                getCompanies()
+            )
         }).catch(err => {
             console.log(err);
         })
