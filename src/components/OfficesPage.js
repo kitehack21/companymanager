@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
+import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import Officecard from './OfficeCard'
-import { getOffices } from '../actions'
+import { getCompanies, getOffices } from '../actions'
 
 class OfficesPage extends Component{
 
     componentWillMount(){
+        this.props.getCompanies();
         this.props.getOffices()
     }
 
+    onReturnClick(){
+        this.props.history.push('/')
+    }
+
     renderOffices(){
-        console.log(this.props.match.params.companyId)
-        console.log(this.props.offices)
 
         var arrJSX = this.props.offices.map((office) => {
             if(parseInt(office.companyId) === parseInt(this.props.match.params.companyId))
@@ -30,13 +34,43 @@ class OfficesPage extends Component{
         }
     }
 
+    
+
     render(){
+        
         return(
             <div className="col-md-push-2 col-md-8 wrapper b-a b-dark m-t-lg" style={{"borderRadius":"8px"}}>
                 <div className="padder-v col-md-12 b-b b-dark" >  
-                    <h3>Offices</h3>
+                    <div className="b-b b-dark">
+                        <h3>{this.props.selectedCompany.name}</h3>
+                    </div>
+                    <div className="padder-v-xs">
+                        <div>
+                            <strong>Address:</strong>
+                        </div>
+                        <div>
+                            {this.props.selectedCompany.address}
+                        </div>
+                    </div>
+                    <div className="padder-v-xs">
+                        <div>
+                            <strong>Revenue:</strong>
+                        </div>
+                        <div>
+                            {this.props.selectedCompany.revenue}
+                        </div>
+                    </div>
+                    <div className="padder-v-xs">
+                        <div>
+                            <strong>Phone No.:</strong>
+                        </div>
+                        <div>
+                            {this.props.selectedCompany.phoneCode}{this.props.selectedCompany.phoneNumber} 
+                            <Button style={{"float": "right"}} onClick={() => this.onReturnClick()}>Back to Overview</Button>
+                        </div>
+                    </div>
                 </div>
-                <div className="padder-v cold-md-12 m-l-md">
+                <div className="padder-v col-md-12 m-l-md">
                 <h3>Offices</h3>
                     {this.renderOffices()}
                 </div>
@@ -46,10 +80,16 @@ class OfficesPage extends Component{
 
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
     const { companies, offices } = state
+    var selectedCompany = {}
+    for(var index in companies){
+        if(parseInt(props.match.params.companyId) === parseInt(companies[index].id)){
+            selectedCompany = companies[index]
+        }
+    }
 
-    return { companies, offices }
+    return { selectedCompany, offices }
 }
 
-export default connect(mapStateToProps, { getOffices })(OfficesPage)
+export default connect(mapStateToProps, { getCompanies, getOffices })(OfficesPage)

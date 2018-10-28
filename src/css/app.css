@@ -3000,7 +3000,7 @@ a.bg-light:focus {
   padding-left: 0px;
   padding-right: 15px;
 }
-.padder-bottom {
+.padder-bottom-only {
   padding-bottom: 15px
 }
 .padder-bottom-sm {
@@ -3016,6 +3016,10 @@ a.bg-light:focus {
 }
 .no-padder {
   padding: 0 !important;
+}
+.no-padder-h {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .pull-in {
   margin-left: -15px;

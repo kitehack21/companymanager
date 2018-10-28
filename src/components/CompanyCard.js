@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect }from 'react-redux'
 import { deleteCompany } from '../actions'
-
+import { Card, CardHeader, CardInfo } from './common'
 
 class CompanyCard extends Component{
 
     onCompanyDeleteClick(event){
         event.stopPropagation()
-        this.props.deleteCompany(this.props.id)
+        if(window.confirm("Are you sure you want to delete Company?")){
+            this.props.deleteCompany(this.props.id)
+        }
     }
 
     onCompanyCardClick(){
@@ -16,37 +18,12 @@ class CompanyCard extends Component{
 
     render(){
         return(
-            <div className="col-md-6" style={{"paddingLeft":"0px", "paddingRight":"30px"}} onClick={()=>this.onCompanyCardClick()}>
-                <div className="b-a wrapper-md" style={{"borderRadius":"8px"}}>
-                    <div className="b-b b-dark">
-                        <h4><strong>{this.props.name}</strong><button type="button" className="close" onClick={(e)=>this.onCompanyDeleteClick(e)}>×</button></h4>
-                    </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Address:</strong>
-                        </div>
-                        <div>
-                            {this.props.address}
-                        </div>
-                    </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Revenue:</strong>
-                        </div>
-                        <div>
-                            {this.props.revenue}
-                        </div>
-                    </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Phone No.:</strong>
-                        </div>
-                        <div>
-                            {this.props.phone}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Card onClick={() => this.onCompanyCardClick()}>
+                <CardHeader onClick={(e)=>this.onCompanyDeleteClick(e)}>{this.props.name}</CardHeader>
+                <CardInfo title="Address:">{this.props.address}</CardInfo>
+                <CardInfo title="Revenue:">{this.props.revenue}</CardInfo>
+                <CardInfo title="Phone No.:">{this.props.phone}</CardInfo>
+            </Card>
         )
     }
 

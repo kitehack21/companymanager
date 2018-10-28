@@ -6779,4 +6779,17 @@ button.close {
   margin-right: auto;
   width: 50%;
 }
-
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.display-block{
+  display: inline-block;
+}
+.card-hover{
+  transition: box-shadow .3s;
+}
+.card-hover:hover{
+  box-shadow: 0 0px 11px 0 rgba(0,0,0,0.24), 0 11px 20px 0 rgba(0,0,0,0.19)
+}

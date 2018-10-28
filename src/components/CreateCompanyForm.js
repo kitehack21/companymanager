@@ -6,16 +6,78 @@ import ReactPhoneInput from 'react-phone-input-2'
 
 class CreateCompanyForm extends Component{
 
-    onCreateCompanyClick(){
-        var data = {
-            name: this.refs.companyName.value,
-            address: this.refs.companyAddress.value,
-            revenue: this.refs.companyRevenue.value,
+    state = {companyPhoneCode: ""}
+
+    componentDidMount(){
+        function isFloat(n){
+            return Number(n) === n && n % 1 !== 0;
         }
-        this.props.createCompany(data)
+        document.getElementById("companyRevenue").addEventListener("keydown", function (e) {
+            if (!isFloat(this.step)) {
+                if (e.key == "." || e.key == "-" || e.key == "+") {
+                    e.preventDefault();
+                }
+            }
+            while ( this.value.toString()[0] === "0" && this.value.length > 0){
+               this.value = this.value.toString().slice(1);
+            }
+        });
+        document.getElementById("companyPhoneNumber").addEventListener("keydown", function (e) {
+            if (!isFloat(this.step)) {
+                if (e.key == "." || e.key == "-" || e.key == "+") {
+                    e.preventDefault();
+                }
+            }
+            if(e.key == "Backspace"){
+                return
+            }
+            else if (this.value.length == 8){
+                e.preventDefault();
+            }
+        });
+    }
+    
+    onCreateCompanyClick(){
+        if(this.refs.companyName.value === ""){
+
+        }
+        else if(this.refs.companyAddress.value === ""){
+
+        }
+        else if(this.refs.companyRevenue.value === ""){
+
+        }
+        else if(this.state.companyPhoneCode === "" || this.refs.phoneNumber){
+
+        }
+        else{
+            var data = {
+                name: this.refs.companyName.value,
+                address: this.refs.companyAddress.value,
+                revenue: this.refs.companyRevenue.value,
+                phoneCode: "",
+                phoneNumber: ""
+            }
+            this.props.createCompany(data)
+            this.resetValues()
+        }
+        
+    }
+
+    resetValues(){
+        document.getElementById("companyName").value = ""
+        document.getElementById("companyAddress").value = ""
+        document.getElementById("companyRevenue").value = ""
+        document.getElementById("companyPhoneNumber").value = ""
+    }
+
+    handleCodeChange(e){
+        console.log(e)
+        this.setState({companyPhoneCode: e})
     }
 
     render(){
+        
         return(
             <div>
                 <h4>Create Company</h4>
@@ -24,7 +86,7 @@ class CreateCompanyForm extends Component{
                         <strong>Name:</strong>
                     </div>
                     <div >
-                        <input type="text" ref="companyName" placeholder="name" className="form-control"/>
+                        <input type="text" ref="companyName" id="companyName" placeholder="name" className="form-control"/>
                     </div>
                 </div>
                 <div className="padder-v-xs">
@@ -32,7 +94,7 @@ class CreateCompanyForm extends Component{
                         <strong>Address:</strong>
                     </div>
                     <div>
-                        <input type="text" ref="companyAddress" placeholder="address" className="form-control"/>
+                        <input type="text" ref="companyAddress" id="companyAddress" placeholder="address" className="form-control"/>
                     </div>
                 </div>
                 <div className="padder-v-xs">
@@ -40,7 +102,7 @@ class CreateCompanyForm extends Component{
                         <strong>Revenue:</strong>
                     </div>
                     <div>
-                        <input type="text" ref="companyRevenue" placeholder="revenue" className="form-control"/>
+                        <input type="number" ref="companyRevenue" id="companyRevenue" min="0" placeholder="revenue" className="form-control" />
                     </div>
                 </div>
                 <div className="padder-v-xs">
@@ -48,7 +110,8 @@ class CreateCompanyForm extends Component{
                         <strong>Phone No:</strong>
                     </div>
                     <div>
-                        <ReactPhoneInput inputStyle={{"width":"100%"}}/>
+                        <div className="col-md-4 no-padder-h padder-bottom-only"><ReactPhoneInput inputStyle={{"width":"100%"}} placeholder="code" onKeyDown={(e) => {e.preventDefault()}} onChange={(e) => this.handleCodeChange(e)}/></div>
+                        <div className="col-md-8 no-padder-h padder-bottom-only"><input type="number" ref="companyPhoneNumber" id="companyPhoneNumber" min="0" placeholder="number" className="form-control" /></div>
                     </div>
                 </div>
                 <div className="padder-v">

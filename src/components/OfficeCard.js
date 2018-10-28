@@ -1,43 +1,33 @@
 import React, { Component } from 'react'
 import { connect }from 'react-redux'
 import { deleteOffice } from '../actions'
+import { Card, CardHeader, CardInfo } from './common'
 
 class OfficeCard extends Component{
 
     onOfficeDeleteClick(event){
         event.stopPropagation()
-        this.props.deleteOffice(this.props.id)
+        if(window.confirm("Are you sure you want to delete Office?")){
+            this.props.deleteOffice(this.props.id)
+        }
     }
-
 
     render(){
         return(
-            <div className="col-md-6" style={{"paddingLeft":"0px", "paddingRight":"30px"}}>
-                <div className="b-a wrapper-md" style={{"borderRadius":"8px"}}>
-                    <div className="b-b b-dark">
-                        <h4><strong>{this.props.name}</strong><button type="button" className="close" onClick={(e)=>this.onOfficeDeleteClick(e)}>×</button></h4>
+            <Card>
+                <CardHeader onClick={(e)=>this.onOfficeDeleteClick(e)}>{this.props.name}</CardHeader>
+                <CardInfo title="Location:">
+                    <div>
+                        Lat - {this.props.longitude}
                     </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Location:</strong>
-                        </div>
-                        <div>
-                            Lat - {this.props.longitude}
-                        </div>
-                        <div>
-                            Log - {this.props.latitude}
-                        </div>
+                    <div>
+                        Log - {this.props.latitude}
                     </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Office Start Date:</strong>
-                        </div>
-                        <div>
-                            {this.props.startDate}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </CardInfo>
+                <CardInfo title="Office Start Date:">
+                    {this.props.startDate}
+                </CardInfo>
+            </Card>
         )
     }
 

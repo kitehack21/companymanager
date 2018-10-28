@@ -6,6 +6,7 @@ import OfficesPage from './components/OfficesPage'
 import "../src/css/bootstrap.css"
 import "../src/css/app.css"
 import "../src/css/font-awesome.min.css"
+import "../src/css/animate.css"
 
 class App extends Component {
   render() {

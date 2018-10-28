@@ -37,7 +37,7 @@ class OverviewPage extends Component{
                         <CreateOfficeForm />
                     </div>
                 </div>
-                <div className="padder-v cold-md-12 m-l-lg">
+                <div className="padder-v col-md-12 m-l-lg">
                     <h3>Companies</h3>
                     {this.renderCompaniesList()}
                 </div>
@@ -48,7 +48,7 @@ class OverviewPage extends Component{
 }
 
 const mapStateToProps = (state) =>{
-    const companies = state.companies
+    const { companies }= state
     return { companies }
 }
 

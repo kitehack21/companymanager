@@ -2,8 +2,27 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { createOffice } from '../actions'
+import DatePicker from 'react-datepicker';
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css';
 
 class CreateOfficeForm extends Component{
+    constructor (props) {
+        super(props)
+        this.state = {
+          startDate: "",
+          latitude:"",
+          longitude: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
+      }
+     
+      handleChange(date) {
+          console.log(date)
+        this.setState({
+          startDate: date
+        });
+      }
 
     renderOfficeSelect(){
         var arrJSX = this.props.companies.map((company) => {
@@ -14,14 +33,60 @@ class CreateOfficeForm extends Component{
     }
 
     onOfficeCreateClick(){
-        var data = {
-            name: this.refs.officeName.value,
-            latitude: this.refs.officeLat.value,
-            longitude: this.refs.officeLong.value,
-            startDate: this.refs.officeStartDate.value,
-            companyId: this.refs.officeCompanyId.value
+        if(this.refs.officeName.value === ""){
+
         }
-        this.props.createOffice(data)
+        else if(this.refs.officeLat.value === ""){
+
+        }
+        else if(this.refs.officeLong.value === ""){
+
+        }
+        else if(this.state.startDate === "" ){
+
+        }
+        else if(this.refs.officeCompanyId.value == 0 ){
+
+        }
+        else{
+            var data = {
+                name: this.refs.officeName.value,
+                latitude: this.refs.officeLat.value,
+                longitude: this.refs.officeLong.value,
+                startDate: this.state.startDate,
+                companyId: this.refs.officeCompanyId.value
+            }
+            this.props.createOffice(data)
+            this.resetValues()
+        }
+    }
+
+    resetValues(){
+        this.refs.officeName.value = ""
+        this.refs.officeLat.value = ""
+        this.refs.officeLong.value = ""
+        this.refs.officeCompanyId.value = 0
+        this.setState({startDate: ""})
+    }
+
+    onChange(){
+        return (
+            {
+                Latitude: (key) => {
+                    const regex = /^[0-9\b]+$/;
+                    console.log(key.target.value)
+                    if (key.target.value === '' || regex.test(key.target.value)) {
+                    this.setState({Location: {Lat: key.target.value}})
+                    }
+                },
+                Longitude: (key) => {
+                    const regex = /^[-+]?\d*(\.\d*)?$/;
+                    if (key.target.value === '' || regex.test(key.target.value)) {
+                        this.setState({longitude: key.target.value})
+                    }
+                }
+            }
+        )
     }
 
     render(){
@@ -42,10 +107,10 @@ class CreateOfficeForm extends Component{
                     </div>
                     <div>
                         <div className="col-md-6 padder-right-only padder-bottom-sm">
-                            <input type="text" placeholder="latitude" ref="officeLat" className="form-control"/>
+                            <input type="number" placeholder="latitude" ref="officeLat" className="form-control"/>
                         </div>
-                        <div className="col-md-6 padder-left-only padder-bottom-sm">
-                            <input type="text" placeholder="longitude" ref="officeLong" className="form-control"/>
+                        <div className="col-md-6 padder-right-only padder-bottom-sm">
+                            <input type="number" placeholder="longitude" ref="officeLong" onChange={this.onChange()['Longitude'].bind(this)} value={this.state.longitude}  className="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -54,7 +119,7 @@ class CreateOfficeForm extends Component{
                         <b>Office Start Date:</b>
                     </div>
                     <div>
-                        <input type="text" placeholder="date" ref="officeStartDate" className="form-control"/>
+                        <DatePicker selected={this.state.startDate} onChange={this.handleChange} className="form-control" style={{"width":"100%"}} dateFormat="YYYY/MM/DD"/>
                     </div>
                 </div>
                 <div className="padder-v-xs">
