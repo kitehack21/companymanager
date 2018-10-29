@@ -24,7 +24,7 @@ class OfficesPage extends Component{
             )
         })
         console.log(arrJSX)
-        if(arrJSX.length === 1){
+        if(arrJSX.length === 0){
             return(
                 <div>There are no offices created yet</div>
             )

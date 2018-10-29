@@ -20,7 +20,7 @@ class OverviewPage extends Component{
         }
         else{
             var arrJSX = this.props.companies.map((company) => {
-                return(<CompanyCard key={company.id} id={company.id} name={company.name} address={company.address} revenue={company.revenue} phone={company.phone} history={this.props.history}/>)
+                return(<CompanyCard key={company.id} id={company.id} name={company.name} address={company.address} revenue={company.revenue} phoneCode={company.phoneCode} phoneNumber={company.phoneNumber} history={this.props.history}/>)
             })
             return arrJSX
         }

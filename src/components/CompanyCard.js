@@ -22,7 +22,7 @@ class CompanyCard extends Component{
                 <CardHeader onClick={(e)=>this.onCompanyDeleteClick(e)}>{this.props.name}</CardHeader>
                 <CardInfo title="Address:">{this.props.address}</CardInfo>
                 <CardInfo title="Revenue:">{this.props.revenue}</CardInfo>
-                <CardInfo title="Phone No.:">{this.props.phone}</CardInfo>
+                <CardInfo title="Phone No.:">{this.props.phoneCode}{this.props.phoneNumber}</CardInfo>
             </Card>
         )
     }
