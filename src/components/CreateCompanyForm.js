@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { createCompany } from '../actions'
 import ReactPhoneInput from 'react-phone-input-2'
+import phoneCodes from './phoneCode.json'
+import $ from 'jquery'
 
 class CreateCompanyForm extends Component{
-
-    state = {companyPhoneCode: ""}
+    state = {phoneCode : ""}
 
     componentDidMount(){
         function isFloat(n){
@@ -35,8 +36,20 @@ class CreateCompanyForm extends Component{
                 e.preventDefault();
             }
         });
+        
+        $("#myInput").bind("select",function(){
+            if($('#result').find('option').length) {
+                if($('option[value="+this.value+"]').length > 0){
+                  $("#myInput").val($('option[value='+this.value+']').data("text"));
+                }
+            }
+        })
     }
     
+    componentWillReceiveProps(NewProps){
+        console.log(NewProps)
+    }
+
     onCreateCompanyClick(){
         if(this.refs.companyName.value === ""){
 
@@ -47,7 +60,7 @@ class CreateCompanyForm extends Component{
         else if(this.refs.companyRevenue.value === ""){
 
         }
-        else if(this.state.companyPhoneCode === "" || this.refs.phoneNumber){
+        else if( this.refs.phoneNumber){
 
         }
         else{
@@ -55,8 +68,8 @@ class CreateCompanyForm extends Component{
                 name: this.refs.companyName.value,
                 address: this.refs.companyAddress.value,
                 revenue: this.refs.companyRevenue.value,
-                phoneCode: "",
-                phoneNumber: ""
+                phoneCode: this.refs.companyPhoneCode.value,
+                phoneNumber: this.refs.companyPhoneNumber.value
             }
             this.props.createCompany(data)
             this.resetValues()
@@ -71,9 +84,20 @@ class CreateCompanyForm extends Component{
         document.getElementById("companyPhoneNumber").value = ""
     }
 
-    handleCodeChange(e){
-        console.log(e)
-        this.setState({companyPhoneCode: e})
+    handleOnChange = (value) => {
+        if(value !== ""){
+            this.setState({phoneCode: value})
+        }
+    }
+
+    renderPhoneCodes(){
+        var arrJSX = phoneCodes.map((item) => {
+            return(
+                <option value={item.code}>{item.name}</option>
+            )
+        })
+
+        return arrJSX
     }
 
     render(){
@@ -107,11 +131,18 @@ class CreateCompanyForm extends Component{
                 </div>
                 <div className="padder-v-xs">
                     <div>
-                        <strong>Phone No:</strong>
+                        <strong>Phone No: {this.props.phone}</strong>
                     </div>
                     <div>
-                        <div className="col-md-4 no-padder-h padder-bottom-only"><ReactPhoneInput inputStyle={{"width":"100%"}} placeholder="code" onKeyDown={(e) => {e.preventDefault()}} onChange={(e) => this.handleCodeChange(e)}/></div>
-                        <div className="col-md-8 no-padder-h padder-bottom-only"><input type="number" ref="companyPhoneNumber" id="companyPhoneNumber" min="0" placeholder="number" className="form-control" /></div>
+                        <div className="col-md-4 no-padder-h padder-bottom-only" >
+                            <input id="myInput" type="text" list="result" className="form-control"/>
+                            <datalist id="result"> 
+                                {this.renderPhoneCodes()}
+                            </datalist>
+                        </div>
+                        <div className="col-md-8 no-padder-h padder-bottom-only">
+                            <input type="number" ref="companyPhoneNumber" id="companyPhoneNumber" min="0" placeholder="number" className="form-control" />
+                        </div>
                     </div>
                 </div>
                 <div className="padder-v">
@@ -123,4 +154,4 @@ class CreateCompanyForm extends Component{
 
 }
 
-export default connect( null, { createCompany })(CreateCompanyForm)
+export default connect(null, { createCompany })(CreateCompanyForm)

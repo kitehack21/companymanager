@@ -49,14 +49,36 @@ app.post('/companies', function(req,res){
 app.delete('/companies/:id', function(req,res){
     var sql = `DELETE FROM companies WHERE id = ${req.params.id}`
 
-    conn.query(sql, (err,results)=>{
-        if(err){
-            res.send(err)
-            throw err
-        }
-        console.log(results)
-        console.log("Delete Company Success")
-        res.send({code: 400, status:"Delete Company Success"});
+    conn.beginTransaction(function(err){
+        if(err) {throw err;}
+        conn.query(sql, (err, results)=>{
+            console.log(results)
+            if(err){
+                conn.rollback(function(){
+                    console.log("Rollback Succesful1")
+                    throw err
+                })
+            }
+            sql = `DELETE FROM offices WHERE companyId = ${req.params.id}`
+            conn.query(sql, (err1, results1) => {
+                if(err1){
+                    conn.rollback(function(){
+                        console.log("Rollback Succesful2")
+                        throw err1
+                    })
+                }
+                conn.commit(function(err2){
+                    if (err2){
+                        conn.rollback(function(){
+                            console.log("Rollback Succesful3")
+                            throw err2;
+                        })
+                    }
+                    res.send({code: 400, status:"Delete Company Success"})
+                    console.log("Delete companies and subsequent offices succesful")
+                })
+            })
+        })
     })
 })
 

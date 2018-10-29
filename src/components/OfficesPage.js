@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import Officecard from './OfficeCard'
 import { getCompanies, getOffices } from '../actions'
+import { CardInfo } from './common'
 
 class OfficesPage extends Component{
 
@@ -16,15 +17,14 @@ class OfficesPage extends Component{
     }
 
     renderOffices(){
-
         var arrJSX = this.props.offices.map((office) => {
             if(parseInt(office.companyId) === parseInt(this.props.match.params.companyId))
-            return(
+                return(
                 <Officecard key={office.id} id={office.id} name={office.name} longitude={office.longitude} latitude={office.latitude} startDate={office.startDate}/>
             )
         })
-
-        if(arrJSX.length === 0){
+        console.log(arrJSX)
+        if(arrJSX.length === 1){
             return(
                 <div>There are no offices created yet</div>
             )
@@ -44,22 +44,8 @@ class OfficesPage extends Component{
                     <div className="b-b b-dark">
                         <h3>{this.props.selectedCompany.name}</h3>
                     </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Address:</strong>
-                        </div>
-                        <div>
-                            {this.props.selectedCompany.address}
-                        </div>
-                    </div>
-                    <div className="padder-v-xs">
-                        <div>
-                            <strong>Revenue:</strong>
-                        </div>
-                        <div>
-                            {this.props.selectedCompany.revenue}
-                        </div>
-                    </div>
+                    <CardInfo title="Address:">{this.props.selectedCompany.address}</CardInfo>
+                    <CardInfo title="Revenue:">{this.props.selectedCompany.revenue}</CardInfo>
                     <div className="padder-v-xs">
                         <div>
                             <strong>Phone No.:</strong>
@@ -71,7 +57,7 @@ class OfficesPage extends Component{
                     </div>
                 </div>
                 <div className="padder-v col-md-12 m-l-md">
-                <h3>Offices</h3>
+                    <h3>Offices</h3>
                     {this.renderOffices()}
                 </div>
             </div>

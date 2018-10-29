@@ -17,8 +17,7 @@ class CreateOfficeForm extends Component{
         this.handleChange = this.handleChange.bind(this);
       }
      
-      handleChange(date) {
-          console.log(date)
+    handleChange(date) {
         this.setState({
           startDate: date
         });
@@ -53,7 +52,7 @@ class CreateOfficeForm extends Component{
                 name: this.refs.officeName.value,
                 latitude: this.refs.officeLat.value,
                 longitude: this.refs.officeLong.value,
-                startDate: this.state.startDate,
+                startDate: this.state.startDate.format("MM/DD/YYYY"),
                 companyId: this.refs.officeCompanyId.value
             }
             this.props.createOffice(data)
@@ -119,7 +118,7 @@ class CreateOfficeForm extends Component{
                         <b>Office Start Date:</b>
                     </div>
                     <div>
-                        <DatePicker selected={this.state.startDate} onChange={this.handleChange} className="form-control" style={{"width":"100%"}} dateFormat="YYYY/MM/DD"/>
+                        <DatePicker selected={this.state.startDate} onChange={this.handleChange} className="form-control" style={{"width":"100%"}}/>
                     </div>
                 </div>
                 <div className="padder-v-xs">
