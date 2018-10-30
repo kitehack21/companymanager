@@ -58,12 +58,12 @@ Support for Internet Explorer 9, 10, and 11 requires [polyfills](https://github.
 ## Features
 
 ### 1.) Create Company:
-![alt text](./readmeimages/createcomapany.jpg)
+![alt text](./readmeimages/createcompany.jpg)
 
 
 Forms that haven't been filled will display an error label upon pressing create
 
-![alt text](./readmeimages/createcomapanyerror.jpg)
+![alt text](./readmeimages/createcompanyerror.jpg)
 
 
 
