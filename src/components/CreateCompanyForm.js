@@ -79,6 +79,7 @@ class CreateCompanyForm extends Component{
             }
             this.props.createCompany(data)
             this.resetValues()
+            alert("Company has been created")
         }
         
     }

@@ -105,6 +105,7 @@ class CreateOfficeForm extends Component{
             }
             this.props.createOffice(data)
             this.resetValues()
+            alert("Office has been created")
         }
     }
 
