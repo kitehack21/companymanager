@@ -81,7 +81,6 @@ class CreateCompanyForm extends Component{
             this.resetValues()
             alert("Company has been created")
         }
-        
     }
 
     resetValues(){
