@@ -6,7 +6,8 @@ Node.js is required to utilize its node package manager (npm)
 This project uses the following dependencies:
 
 
-``` "axios": "^0.18.0",
+``` 
+    "axios": "^0.18.0",
     "moment": "^2.22.2",
     "react": "^16.6.0",
     "react-bootstrap": "^0.32.4",
@@ -17,7 +18,8 @@ This project uses the following dependencies:
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"```
+    "redux-thunk": "^2.3.0" 
+```
 
 These dependancies are already listed in the package.json file.
 To install, simply run :
@@ -122,8 +124,10 @@ Data handling is mostly done through the global state
 
 The system uses two reducers, one for all company data and the other for all office data
 
-```export default combineReducers({
+```
+export default combineReducers({
     companies: CompanyReducer,
     offices: OfficeReducer
-})```
+})
+```
 
