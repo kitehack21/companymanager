@@ -4,6 +4,7 @@ Node.js is required to utilize it's node package manager (npm)
 ## Installation
 
 This project uses the following dependencies:
+
 `"axios": "^0.18.0",
 "moment": "^2.22.2",
 "react": "^16.6.0",
@@ -16,6 +17,7 @@ This project uses the following dependencies:
 "react-scripts": "2.0.5",
 "redux": "^4.0.1",
 "redux-thunk": "^2.3.0"`
+
 These dependancies are already listed in the package.json file.
 To install, simply run :
 ### `npm install`
@@ -56,7 +58,12 @@ Support for Internet Explorer 9, 10, and 11 requires [polyfills](https://github.
 ## Features
 
 ### 1.) Create Company:
-![alt text](./readmeimages/createimage.jpg)
+![alt text](./readmeimages/createcomapany.jpg)
+
+
+Forms that haven't been filled will display an error label upon pressing create
+
+![alt text](./readmeimages/createcomapanyerror.jpg)
 
 
 
