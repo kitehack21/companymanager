@@ -131,3 +131,52 @@ export default combineReducers({
 })
 ```
 
+The component `OverviewPage` recieves the companies reducer
+
+```
+const mapStateToProps = (state) =>{
+    const { companies }= state
+    return { companies }
+}
+
+export default connect(mapStateToProps, {getCompanies})(OverviewPage)
+```
+
+Then the company data will be displayed with `CompanyCard` component via mapping
+
+```
+if(this.props.companies.length === 0){
+            return(
+                <div>There are no companies created yet</div>
+            )
+        }
+        else{
+            var arrJSX = this.props.companies.map((company) => {
+                return(<CompanyCard key={company.id} id={company.id} name={company.name} address={company.address} revenue={company.revenue} phoneCode={company.phoneCode} phoneNumber={company.phoneNumber} history={this.props.history}/>)
+            })
+            return arrJSX
+        }
+```
+
+The component `OfficesPage` recieves the offices reducer
+
+Since the offices reducer contains data for all offices, it is first filtered via looping based on whether the current url params matches each office's foreignkey `companyId`
+
+![alt text](./readmeimages/params.jpg)   `props.match.params.companyId = 13`
+
+```
+const mapStateToProps = (state, props) => {
+    const { companies, offices } = state
+    var selectedCompany = {}
+    for(var index in companies){
+        if(parseInt(props.match.params.companyId) === parseInt(companies[index].id)){
+            selectedCompany = companies[index]
+        }
+    }
+
+    return { selectedCompany, offices }
+}
+```
+
+
+
