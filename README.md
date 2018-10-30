@@ -53,6 +53,9 @@ In the api directory `/companymanager/managerapi` you can run :
 
 This will run the api server locally on [http://localhost:1994](http://localhost:1994)
 
+MySQL is used for data storage, and requires the following tables and columns:
+![alt text](./readmeimages/companiestable.jpg)![alt text](./readmeimages/officestable.jpg)
+
 ## Supported Browsers
 
 By default, the generated project supports all modern browsers.<br>
