@@ -158,9 +158,10 @@ if(this.props.companies.length === 0){
         }
 ```
 
-The component `OfficesPage` recieves the offices reducer
+The component `OfficesPage` recieves the companies and offices reducer.
+Upon selection of a `CompanyCard` the page will be redirected to `/companies/:companyId` , in which companyId will be passed from the id of the selcted company
 
-Since the offices reducer contains data for all offices, it is first filtered via looping based on whether the current url params matches each office's foreignkey `companyId`
+Since the companies reducer contains data for all companies, it is first filtered via looping to acquire the data of the selected company
 
 ![alt text](./readmeimages/params.jpg)   `props.match.params.companyId = 13`
 
@@ -176,6 +177,28 @@ const mapStateToProps = (state, props) => {
 
     return { selectedCompany, offices }
 }
+```
+
+The offices reducer is also filtered to only obtain data for the offices of the selected company. Filtering is done during mapping of the `RenderOffices()` function of the `OfficesPage` component.
+
+```
+    renderOffices(){
+        var arrJSX = this.props.offices.map((office) => {
+            if(parseInt(office.companyId) === parseInt(this.props.match.params.companyId))
+                return(
+                <Officecard key={office.id} id={office.id} name={office.name} longitude={office.longitude} latitude={office.latitude} startDate={office.startDate}/>
+            )
+        })
+        console.log(arrJSX)
+        if(arrJSX.length === 0){
+            return(
+                <div>There are no offices created yet</div>
+            )
+        }
+        else{
+            return arrJSX
+        }
+    }
 ```
 
 
