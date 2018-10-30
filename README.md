@@ -61,11 +61,59 @@ Support for Internet Explorer 9, 10, and 11 requires [polyfills](https://github.
 ![alt text](./readmeimages/createcompany.jpg)
 
 
-Forms that haven't been filled will display an error label upon pressing create
+Fields that haven't been filled will display an error label upon pressing create
 
 ![alt text](./readmeimages/createcompanyerror.jpg)
 
+Phone code can be selected via dropdown. Revenue and phone number fields can only be inputted with positive floor numbers
 
+![alt text](./readmeimages/phonecodedropdown.jpg)
+
+An alert will be shown upon succesful creation
+
+![alt text](./readmeimages/createcompanysuccess.jpg)
+
+All created Companies will display as cards under the Company section on the main page
+
+![alt text](./readmeimages/companycard.jpg)
+
+### 2.) Create Office:
+
+![alt text](./readmeimages/createoffice.jpg)
+
+Fields that haven't been filled will display an error label upon pressing create
+
+![alt text](./readmeimages/createofficeerror.jpg)
+
+Date selection uses a datepicker widget
+
+![alt text](./readmeimages/datepicker.jpg)
+
+Any created companies will appear in the Company dropdown
+
+![alt text](./readmeimages/companydropdown.jpg)
+
+An alert will be shown upon succesful creation
+
+![alt text](./readmeimages/createofficesuccess.jpg)
+
+### 3.) Information Display:
+
+All created Companies will display as cards under the `Companies` section on the main page
+
+![alt text](./readmeimages/companycard.jpg)
+
+Clicking on the X on the upper right will prompt the deletion of the company card (along with all associated offices) from the database
+
+![alt text](./readmeimages/deletecompany.jpg)
+
+Clicking on a company card will redirect you to it's respective page, detailing it's offices
+
+![alt text](./readmeimages/officepage.jpg)
+
+Clicking on the X on the upper right of the office card will also prompt its deletion
+
+Clicking on `Back to Overview` will return you to the main page
 
 
 
