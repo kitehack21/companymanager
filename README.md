@@ -5,17 +5,17 @@ Node.js is required to utilize it's node package manager (npm)
 
 This project uses the following dependencies:
 
-`"axios": "^0.18.0",
-"moment": "^2.22.2",
-"react": "^16.6.0",
-"react-bootstrap": "^0.32.4",
-"react-datepicker": "^1.7.0",
-"react-dom": "^16.6.0",
-"react-phone-input-2": "^2.6.1",
-"react-redux": "^5.1.0",
-"react-router-dom": "^4.3.1",
-"react-scripts": "2.0.5",
-"redux": "^4.0.1",
+`"axios": "^0.18.0", <br/>
+"moment": "^2.22.2",<br/>
+"react": "^16.6.0",<br/>
+"react-bootstrap": "^0.32.4",<br/>
+"react-datepicker": "^1.7.0",<br/>
+"react-dom": "^16.6.0",<br/>
+"react-phone-input-2": "^2.6.1",<br/>
+"react-redux": "^5.1.0",<br/>
+"react-router-dom": "^4.3.1",<br/>
+"react-scripts": "2.0.5",<br/>
+"redux": "^4.0.1",<br/>
 "redux-thunk": "^2.3.0"`
 
 These dependancies are already listed in the package.json file.
