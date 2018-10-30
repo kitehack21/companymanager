@@ -182,7 +182,7 @@ const mapStateToProps = (state, props) => {
 }
 ```
 
-The offices reducer is also filtered to only obtain data for the offices of the selected company. Filtering is done during mapping of the `RenderOffices()` function of the `OfficesPage` component.
+The offices reducer is also filtered to only obtain data for the offices of the selected company. Filtering is done in the `RenderOffices()` function of the `OfficesPage` component.
 
 ```
     renderOffices(){
